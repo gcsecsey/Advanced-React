@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 import PropTypes from 'prop-types';
 import Header from './Header';
@@ -11,7 +11,7 @@ const theme = {
 	lightgrey: '#E1E1E1',
 	offWhite: '#EDEDED',
 	maxWidth: '1000px',
-	bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)'
+	bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
 };
 
 const StyledPage = styled.div`
@@ -28,21 +28,17 @@ const Inner = styled.div`
 injectGlobal`
   @font-face {
     font-family: 'radnika_next';
-    src: url('/static/radnikanext-medium-webfont.woff2')
-    format('woff2');
+    src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
-  
   html {
     box-sizing: border-box;
     font-size: 10px;
   }
-
   *, *:before, *:after {
     box-sizing: inherit;
   }
-
   body {
     padding: 0;
     margin: 0;
@@ -50,22 +46,33 @@ injectGlobal`
     line-height: 2;
     font-family: 'radnika_next';
   }
-
   a {
     text-decoration: none;
     color: ${theme.black};
   }
 `;
 
-const Page = ({ children }) => (
-  <ThemeProvider theme={theme}>
-    <StyledPage>
-      <Meta />
-      <Header />
-      <p>Hey, I&apos;m the page component</p>
-      <Inner>{children}</Inner>
-    </StyledPage>
-  </ThemeProvider>
-);
+class Page extends Component {
+	render() {
+		const { children } = this.props;
+
+		return (
+			<ThemeProvider theme={theme}>
+				<StyledPage>
+					<Meta />
+					<Header />
+					<Inner>{children}</Inner>
+				</StyledPage>
+			</ThemeProvider>
+		);
+	}
+}
+
+Page.propTypes = {
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]).isRequired,
+};
 
 export default Page;

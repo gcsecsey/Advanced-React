@@ -1,0 +1,18 @@
+type User {
+	id: ID! @unique @id
+	name: String!
+	email: String!
+}
+
+type Item {
+	id: ID! @unique
+	title: String!
+	description: String!
+	image: String
+	largeImage: String
+	price: Int!
+	# prisma provides the DateTime type
+	createAt: DateTime!
+	updatedAt: DateTime!
+	# user: User!
+}
