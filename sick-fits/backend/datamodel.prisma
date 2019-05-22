@@ -5,14 +5,14 @@ type User {
 }
 
 type Item {
-	id: ID! @unique
+	id: ID! @unique @id
 	title: String!
 	description: String!
 	image: String
 	largeImage: String
 	price: Int!
 	# prisma provides the DateTime type
-	createAt: DateTime!
-	updatedAt: DateTime!
+	# createdAt: DateTime!
+	# updatedAt: DateTime! @updatedAt
 	# user: User!
 }
