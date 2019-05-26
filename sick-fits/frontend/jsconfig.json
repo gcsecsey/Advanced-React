@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"target": "es2016",
+		"module": "commonjs",
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react",
+		"baseUrl": "."
+	},
+	"exclude": ["node_modules", ".next"]
+}
