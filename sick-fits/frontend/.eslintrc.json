@@ -3,7 +3,12 @@
 	"extends": ["airbnb", "prettier", "prettier/react"],
 	"plugins": ["react", "jsx-a11y", "import", "prettier"],
 	"rules": {
-		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [".js", ".jsx"]
+			}
+		],
 		"no-unused-expressions": [
 			2,
 			{
