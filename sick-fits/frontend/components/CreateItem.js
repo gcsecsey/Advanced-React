@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { parse } from 'path';
 import Router from 'next/router';
+import fetch from 'isomorphic-fetch';
 import Form from './styles/Form';
-import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
 
 const CREATE_ITEM_MUTATION = gql`
@@ -31,8 +30,8 @@ class CreateItem extends Component {
 	state = {
 		title: 'Doggo',
 		description: 'Very good boi',
-		image: 'dogg.jpg',
-		largeImage: 'doggg.jpg',
+		image: '',
+		largeImage: '',
 		price: 9000,
 	};
 
@@ -42,7 +41,31 @@ class CreateItem extends Component {
 		this.setState({ [name]: val });
 	};
 
+	uploadFile = async e => {
+		console.log('uploading file...');
+		const { files } = e.target;
+		const data = new FormData();
+		data.append('file', files[0]);
+		data.append('upload_preset', 'sickfits');
+
+		const res = await fetch(
+			'https://api.cloudinary.com/v1_1/gcsecsey/image/upload',
+			{
+				method: 'POST',
+				body: data,
+			}
+		);
+
+		const file = await res.json();
+		console.log({ file });
+		this.setState({
+			image: file.secure_url,
+			largeImage: file.eager[0].secure_url,
+		});
+	};
+
 	render() {
+		const { title, image, price, description } = this.state;
 		return (
 			<Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
 				{(createItem, { loading, error }) => (
@@ -62,6 +85,18 @@ class CreateItem extends Component {
 					>
 						<Error error={error} />
 						<fieldset disabled={loading} aria-busy={loading}>
+							<label htmlFor='file'>
+								Image
+								<input
+									type='file'
+									id='file'
+									name='file'
+									placeholder='Upload an image'
+									required
+									onChange={this.uploadFile}
+								/>
+								{image && <img src={image} width='200' alt='product'></img>}
+							</label>
 							<label htmlFor='title'>
 								Title
 								<input
@@ -70,7 +105,7 @@ class CreateItem extends Component {
 									name='title'
 									placeholder='Title'
 									required
-									value={this.state.title}
+									value={title}
 									onChange={this.handleChange}
 								/>
 							</label>
@@ -82,7 +117,7 @@ class CreateItem extends Component {
 									name='price'
 									placeholder='Price'
 									required
-									value={this.state.price}
+									value={price}
 									onChange={this.handleChange}
 								/>
 							</label>
@@ -93,7 +128,7 @@ class CreateItem extends Component {
 									name='description'
 									placeholder='Enter description'
 									required
-									value={this.state.description}
+									value={description}
 									onChange={this.handleChange}
 								/>
 							</label>
