@@ -95,7 +95,7 @@ class CreateItem extends Component {
 									required
 									onChange={this.uploadFile}
 								/>
-								{image && <img src={image} width='200' alt='product'></img>}
+								{image && <img src={image} width='200' alt='product' />}
 							</label>
 							<label htmlFor='title'>
 								Title
