@@ -18,13 +18,14 @@ type Mutation {
 	signin(email: String!, password: String!): User!
 	signout: SuccessMessage
 	requestReset(email: String!): SuccessMessage
+  resetPassword(resetToken: String!, password: String!, confirmPassword: String!): User!
 }
 
 type Query {
 	items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, first: Int): [Item]!
 	item(where: ItemWhereUniqueInput!): Item
 	itemsConnection(where: ItemWhereInput): ItemConnection!
-	users: [User]!
+	users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
 	me: User
 }
 
