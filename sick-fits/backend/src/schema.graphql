@@ -17,6 +17,7 @@ type Mutation {
 	signup(email: String!, password: String!, name: String!): User!
 	signin(email: String!, password: String!): User!
 	signout: SuccessMessage
+	requestReset(email: String!): SuccessMessage
 }
 
 type Query {
@@ -27,7 +28,7 @@ type Query {
 	me: User
 }
 
-type User implements Node {
+type User {
   id: ID!
   name: String!
   email: String!
