@@ -27,5 +27,5 @@ type Item {
 	# prisma provides the DateTime type
 	# createdAt: DateTime!
 	# updatedAt: DateTime! @updatedAt
-	# user: User!
+	user: User!
 }

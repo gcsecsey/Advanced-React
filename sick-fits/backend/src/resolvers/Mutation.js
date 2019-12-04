@@ -6,13 +6,21 @@ const { promisify } = require('util');
 
 const mutations = {
 	async createItem(parent, args, context, info) {
-		//TODO: check if they're logged in
+		if (!context.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
 
 		// we have access to the db inside ctx,
 		// bc we passed it in createServer.js
 		const item = await context.db.mutation.createItem(
 			{
 				data: {
+          // This is how we make a relationship
+          user: {
+            connect: {
+              id: context.request.userId,
+            }
+          },
 					...args
 				}
 			},
