@@ -39,6 +39,7 @@
 			{
 				"aspects": ["invalidHref"]
 			}
-		]
+		],
+		"jsx-a11y/accessible-emoji": 1
 	}
 }

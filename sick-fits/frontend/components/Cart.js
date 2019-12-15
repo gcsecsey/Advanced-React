@@ -40,7 +40,7 @@ const Cart = () => (
 						<CloseButton onClick={toggleCart} title='close'>
 							&times;
 						</CloseButton>
-						<Supreme>{me.name}'s Cart</Supreme>
+						<Supreme>{me.name}&apos;s Cart</Supreme>
 					</header>
 					<ul />
 				</CartStyles>
