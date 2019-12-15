@@ -9,6 +9,7 @@
 				"extensions": [".js", ".jsx"]
 			}
 		],
+		"no-unused-vars": 1,
 		"no-unused-expressions": [
 			2,
 			{
