@@ -6,6 +6,7 @@ import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import formatMoney from '../lib/formatMoney';
 import DeleteItem from './DeleteItem';
+import AddToCart from './AddToCart';
 
 class Item extends Component {
 	render() {
@@ -38,7 +39,7 @@ class Item extends Component {
 							</span>
 						</a>
 					</Link>
-					<button>Add To Cart</button>
+					<AddToCart id={item.id} />
 					<DeleteItem id={item.id}>Delete this item</DeleteItem>
 				</div>
 			</ItemStyles>
